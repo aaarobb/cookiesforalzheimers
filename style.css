@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f8f8f8;
+    color: #333;
+}
+
+header {
+    background: #4B0082;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.hero {
+    background: #e6e6fa;
+    padding: 2rem;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    background: #4B0082;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background: #360061;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #4B0082;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
