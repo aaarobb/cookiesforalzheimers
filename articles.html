@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles | Cookies for Alzheimers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e8e8e8;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            background: rgba(34, 17, 58, 0.89);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .content {
+            padding: 12rem 5% 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 6rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .featured-article {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 0;
+            margin-bottom: 6rem;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .featured-article:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .featured-content {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-label {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .featured-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .featured-content p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .featured-image {
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            animation: fadeInUp 1s ease both;
+        }
+
+        .article-card:nth-child(1) { animation-delay: 0.3s; }
+        .article-card:nth-child(2) { animation-delay: 0.4s; }
+        .article-card:nth-child(3) { animation-delay: 0.5s; }
+        .article-card:nth-child(4) { animation-delay: 0.6s; }
+        .article-card:nth-child(5) { animation-delay: 0.7s; }
+        .article-card:nth-child(6) { animation-delay: 0.8s; }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .article-image {
+            aspect-ratio: 16/10;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .article-content {
+            padding: 2rem;
+        }
+
+        .article-category {
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .article-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .article-content p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            font-weight: 300;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer {
+            padding: 4rem 5%;
+            background: #0a0a0a;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            margin-top: 6rem;
+        }
+
+        @media (max-width: 968px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            .featured-article {
+                grid-template-columns: 1fr;
+            }
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="/MEDIA/Logo.png" alt="Logo" style="width: 50px; height: 50px; border-radius: 8px;">
+                <div class="logo-text">Cookies for Alzheimers</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="page-header">
+            <h1 class="page-title">Articles</h1>
+            <p class="page-subtitle">Breaking down some literature...</p>
+        </div>
+
+        <div class="featured-article">
+            <div class="featured-content">
+                <div class="featured-label">Featured Article</div>
+                <h2>Ethics and Alzheimer's</h2>
+                <p>We know Alzheimer's destroys the mind. But what does that mean for the <em>human</em>-the rational agent-underneath? How does one's identity change when their mind is no longer anchored to past experiences? <a href="/MEDIA/Alzheimer4.pdf" target="_blank">Read more here.</a></p>
+                <div class="featured-meta">
+                    <span>7 min read</span>
+                    <span>•</span>
+                    <span>March 9, 2025</span>
+                </div>
+            </div>
+            <!--<div class="featured-image">PLACEHOLDER</div>-->
+        </div>
+
+        <div class="articles-grid">
+            <div class="article-card">
+                <!--<div class="featured-image">PLACEHOLDER</div>-->
+                <div class="article-content">
+                    <div class="article-category">Research</div>
+                    <h3>Lysosomal Digestion of Cellular Debris and Neurodegenerative Diseases: A Breakdown</h3>
+                    <p>How do intracellular digestion affect plaque buildup in the brain and Neurodegenerative writ large? <a href="/MEDIA/Alzheimer5.pdf" target="_blank">Read more here.</a></p>
+                    <div class="article-meta">
+                        <span>6 min read</span>
+                        <span>Jan 5, 2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card">
+                <!--<div class="featured-image">PLACEHOLDER</div>-->
+                <div class="article-content">
+                    <div class="article-category">Research</div>
+                    <h3>APP, PSEN1, PSEN2, and BACE1 Genes on the Pathogenesis of Alzheimer's Disease and Inhibition Strategies</h3>
+                    <p>What is the relatinship between Alzheimer's and genes? <a href="/MEDIA/Alzheimer3.pdf" target="_blank">Read more here.</a></p>
+                    <div class="article-meta">
+                        <span>6 min read</span>
+                        <span>Sept 29, 2024</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card">
+                <!--<div class="featured-image">PLACEHOLDER</div>-->
+                <div class="article-content">
+                    <div class="article-category">Research</div>
+                    <h3>Alzheimer's Impact on Neural Pathways and Brain Structures</h3>
+                    <p>What specifically happens to each part of the brain as Alzheimer's progresses? <a href="/MEDIA/Alzheimer2.pdf" target="_blank">Read more here.</a></p>
+                    <div class="article-meta">
+                        <span>14 min read</span>
+                        <span>Sept 11, 2024</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card">
+                <!--<div class="featured-image">PLACEHOLDER</div>-->
+                <div class="article-content">
+                    <div class="article-category">Research</div>
+                    <h3>An Introduction to Abnormal Protein Aggregation and Its Role in Alzheimer's Research</h3>
+                    <p>What is the consensus on the molecular origins of Alzheimer's? <a href="/MEDIA/Alzheimer1.pdf" target="_blank">Read more here.</a></p>
+                    <div class="article-meta">
+                        <span>6 min read</span>
+                        <span>Aug 10, 2024</span>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Cookies for Alzheimers. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+<a href="/MEDIA/Alzheimer1.pdf" target="_blank">Read more</a>.
