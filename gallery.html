@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Cookies for Alzheimers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e8e8e8;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            background: rgba(34, 17, 58, 0.89);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .content {
+            padding: 12rem 5% 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 6rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            animation: fadeInUp 1s ease both;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.15s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.25s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.35s; }
+        .gallery-item:nth-child(7) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(8) { animation-delay: 0.45s; }
+        .gallery-item:nth-child(9) { animation-delay: 0.5s; }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 1px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        footer {
+            padding: 4rem 5%;
+            background: #0a0a0a;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            margin-top: 6rem;
+        }
+
+        @media (max-width: 968px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="/MEDIA/Logo.png" alt="Logo" style="width: 50px; height: 50px; border-radius: 8px;">
+                <div class="logo-text">Cookies for Alzheimers</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="page-header">
+            <h1 class="page-title">Gallery</h1>
+            <p class="page-subtitle">Some moments!</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="/MEDIA/meegan.HEIC" alt="Continuing" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>Our Latest Bake Sale!</h3>
+                    <p>We hope to continue our mission.</p>
+                </div>
+            </div>
+
+       
+            <div class="gallery-item">
+                <img src="/MEDIA/interim.HEIC" alt="Continuing" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>Spring!</h3>
+                    <p>Continuing.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/MEDIA/sonali.jpg" alt="Walks!" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>2024 Champion Walker!</h3>
+                    <p>More features.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="/MEDIA/sonaliidk.jpg" alt="Walks!" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>2024 Champion Walker</h3>
+                    <p>Raised $500 from this fundraising event!</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="/MEDIA/dark.HEIC" alt="Continuing" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>Continuing</h3>
+                    <p>Pressing ahead in the dark.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="/MEDIA/memorial.HEIC" alt="New Location" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>New Location!</h3>
+                    <p>Our bake sales try out different locations.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/MEDIA/sonalifriend.JPG" alt="Continuing" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>Continuing</h3>
+                    <p>Continuing to sell our cookies.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/MEDIA/blueshirt.HEIC" alt="Continuing" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>Continuing</h3>
+                    <p>Continuing to sell our cookies.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/MEDIA/whiteshirt.HEIC" alt="Continuing" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>School Year Begins!</h3>
+                    <p>As the school year sets in again, we press ahead.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/MEDIA/Brian.jpg" alt="Cookies with Brian" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>New Jersey Helper!</h3>
+                    <p>Worked with a friend who harks all the way from New Jersey to sell cookies!</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/MEDIA/cookie.HEIC" alt="Aesthetic Image of Cookie" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>Behind the Scenes</h3>
+                    <p>An <em>almost</em> cinematic capture of one of our best-selling cookies: M&Ms.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/MEDIA/second.HEIC" alt="Second Milestone" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>Second!</h3>
+                    <p>Second bake sale.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/MEDIA/thomas.HEIC" alt="Thomas, a person we met, leaves his life story" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>Learning Thomas' Life Story!</h3>
+                    <p>Thomas, a person we had a great time talking to, wrote his entire life story on this box, promising us to never forget.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/MEDIA/og.HEIC" alt="First Milestone" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gallery-overlay">
+                    <h3>First!</h3>
+                    <p>First bake sale.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Cookies for Alzheimers. All rights reserved.</p>
+    </footer>
+</body>
+</html>
